@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>The Language of Flowers</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Spectral:ital,wght@0,400;0,600;1,300&display=swap" rel="stylesheet"/>
+  <style>
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html,body{background:#0e0c0d;color:#fef9f6;font-family:'Spectral',serif;scroll-behavior:smooth;scroll-snap-type:y mandatory;}
+    header,section{position:relative;width:100%;scroll-snap-align:start;}
+
+    header.hero{height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:0 10vw;overflow:hidden;position:relative;
+      background:linear-gradient(180deg,rgba(255,240,245,0.4),rgba(35,5,15,0.7)),url('floral wall.png') center/cover no-repeat;
+      background-blend-mode:lighten;
+    }
+    header.hero::before{content:'';position:absolute;inset:0;background:rgba(10,6,6,0.3);backdrop-filter:brightness(0.85) blur(1px);z-index:1;}
+    .petal{position:absolute;width:24px;height:40px;opacity:0.7;z-index:2;}
+    .petal:nth-of-type(1){left:15%;top:-10%;animation:float1 12s infinite ease-in-out;}
+    .petal:nth-of-type(2){left:40%;top:-15%;animation:float2 14s infinite ease-in-out 1s;}
+    .petal:nth-of-type(3){left:65%;top:-8%;animation:float3 10s infinite ease-in-out 2s;}
+    .petal:nth-of-type(4){left:85%;top:-12%;animation:float4 16s infinite ease-in-out 0.5s;}
+    .petal:nth-of-type(5){left:30%;top:-5%;animation:float2 13s infinite ease-in-out 0.8s;}
+    .petal:nth-of-type(6){left:55%;top:-20%;animation:float1 15s infinite ease-in-out 1.2s;}
+    @keyframes float1{0%{transform:translate(0,0) rotate(0);}50%{transform:translate(30px,70vh) rotate(180deg);}100%{transform:translate(-20px,200vh) rotate(360deg);}}
+    @keyframes float2{0%{transform:translate(0,0) rotate(10deg);}50%{transform:translate(-40px,60vh) rotate(200deg);}100%{transform:translate(20px,200vh) rotate(380deg);}}
+    @keyframes float3{0%{transform:translate(0,0) rotate(-10deg);}50%{transform:translate(50px,80vh) rotate(160deg);}100%{transform:translate(-30px,200vh) rotate(340deg);}}
+    @keyframes float4{0%{transform:translate(0,0) rotate(0);}50%{transform:translate(-60px,65vh) rotate(140deg);}100%{transform:translate(40px,200vh) rotate(320deg);}}
+    .petal svg{width:100%;height:100%;}
+    .hero-content{position:relative;z-index:3;max-width:720px;opacity:0;transform:translateY(30px);animation:fadeInUp 1.4s ease-out forwards;}
+    @keyframes fadeInUp{to{opacity:1;transform:translateY(0);}}
+    header.hero h2{font-family:'Cinzel Decorative',serif;font-size:6.5rem;line-height:1;color:#fff0f0;text-shadow:0 10px 30px rgba(0,0,0,0.45);margin-bottom:24px;}
+    header.hero p{font-size:1.6rem;font-style:italic;font-weight:300;color:#f0e4df;line-height:1.45;max-width:520px;margin-bottom:60px;}
+    .scroll-indicator{position:relative;z-index:3;display:inline-flex;align-items:center;font-family:'Great Vibes',cursive;font-size:1.2rem;color:#fff;padding:14px 36px;background:rgba(255,236,241,0.5);border:2px solid rgba(255,236,241,0.7);border-radius:50px;backdrop-filter:blur(4px);cursor:pointer;letter-spacing:1px;box-shadow:0 8px 30px rgba(255,200,220,0.4);transition:all 0.4s ease;}
+    .scroll-indicator span{margin-right:8px;}
+    .button-flower-png{width:1.2em;margin-left:8px;filter:drop-shadow(0 2px 4px rgba(0,0,0,0.3));transition:transform 0.4s ease;}
+    .scroll-indicator:hover{background:rgba(255,236,241,0.8);color:#2a0c15;transform:scale(1.05) translateY(-2px);box-shadow:0 12px 40px rgba(255,180,200,0.6);}
+    .scroll-indicator:hover .button-flower-png{transform:rotate(20deg) scale(1.1);}
+      section.intro {
+  position: relative;
+  min-height: 100vh;
+  padding: 180px 10vw 200px;
+  background: linear-gradient(180deg, rgba(255,240,245,0.5), rgba(35,5,15,0.8)), url('parchment-flowers.jpg') center/cover no-repeat;
+  background-blend-mode: overlay;
+  overflow: hidden;
+}
+
+    section.intro::before {
+      content: 'Floriography';
+      position: absolute;
+      top: 10%;
+      left: 5%;
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 8rem;
+      color: rgba(255,228,230,0.06);
+      z-index: 1;
+      animation: drift 30s linear infinite alternate;
+    }
+
+    @keyframes drift {
+      from { transform: translate(-5%, 0) scale(1); }
+      to { transform: translate(5%, 10%) scale(1.05); }
+    }
+
+    .intro-bg {
+      position: absolute;
+      inset: 0;
+      background: url('botanical-ink.jpg') center/cover no-repeat;
+      opacity: 0.1;
+      filter: contrast(1.2) brightness(1.1);
+    }
+
+    .intro-content {
+      position: relative;
+      z-index: 2;
+      max-width: 720px;
+      opacity: 1;
+  transform: translateY(0);
+  transition: opacity 1s ease, transform 1s ease;
+    }
+
+    
+
+    section.intro h2 {
+  font-family: 'Cinzel Decorative', serif;
+  font-size: 4rem;
+  margin-bottom: 28px;
+  color: #fff8f9;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+
+    section.intro p.description span {
+  display: block;
+  font-size: 1.4rem;
+  color: #f1e4e6;
+  line-height: 1.9;
+  text-shadow: 0 1px 5px rgba(0,0,0,0.2);
+}
+      .timeline {
+      background: #181314;
+      padding: 160px 10vw;
+    }
+    .timeline h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3.5rem;
+      color: #ffe9ed;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    .timeline-container {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .timeline-item {
+      display: flex;
+      flex-direction: column;
+    }
+    .timeline-year {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 1.5rem;
+      color: #fbdde3;
+      margin-bottom: 8px;
+    }
+    .timeline-text {
+      font-size: 1.2rem;
+      color: #e8d7da;
+      line-height: 1.7;
+    }
+    .gallery {
+      background: #141010;
+      padding: 160px 10vw;
+    }
+    .gallery h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3.5rem;
+      color: #ffe9ed;
+      margin-bottom: 60px;
+      text-align: center;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 30px;
+    }
+    .gallery-card {
+      background: #1e1414;
+      border-radius: 12px;
+      overflow: hidden;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      transition: transform 0.4s ease;
+    }
+    .gallery-card:hover {
+      transform: translateY(-5px);
+    }
+    .gallery-card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .gallery-card p {
+      padding: 16px;
+      font-size: 1rem;
+      color: #ffe9ed;
+    }
+    .emotion.love {
+      position: relative;
+      background: linear-gradient(180deg, rgba(60,0,20,0.6), rgba(0,0,0,0.8)), url('red-rose.jpg') center/cover no-repeat;
+      background-blend-mode: overlay;
+      padding: 180px 10vw 200px;
+      color: #ffeef0;
+    }
+    .emotion-bg {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.3);
+    }
+    .emotion-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .emotion-content h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 4rem;
+      color: #ffdee5;
+      margin-bottom: 24px;
+    }
+    .emotion-content p {
+      font-size: 1.3rem;
+      line-height: 1.8;
+      color: #fbd8df;
+      margin-bottom: 32px;
+    }
+    .emotion-content blockquote {
+      font-size: 1.5rem;
+      font-style: italic;
+      color: #fff0f5;
+      border-left: 4px solid #ffb6c1;
+      padding-left: 16px;
+    }
+    .emotion.longing {
+      position: relative;
+      background: linear-gradient(180deg, rgba(10,20,60,0.6), rgba(0,0,0,0.8)), url('forget-me-not.jpg') center/cover no-repeat;
+      background-blend-mode: overlay;
+      padding: 180px 10vw 200px;
+      color: #e8f0ff;
+    }
+    .emotion.longing .emotion-content h2 {
+      color: #c8dcf9;
+    }
+    .emotion.longing .emotion-content p {
+      color: #d0e0ff;
+    }
+    .emotion.longing .emotion-content blockquote {
+      border-left-color: #aac4f9;
+      color: #e0ecff;
+    }
+    .emotion.hope {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,215,0,0.4), rgba(0,0,0,0.7)), url('sunflower.jpg') center/cover no-repeat;
+      background-blend-mode: overlay;
+      padding: 180px 10vw 200px;
+      color: #fff9dc;
+    }
+    .emotion.hope .emotion-content h2 {
+      color: #fff2a8;
+    }
+    .emotion.hope .emotion-content p {
+      color: #fff4c2;
+    }
+    .emotion.hope .emotion-content blockquote {
+      border-left: 4px solid #ffe066;
+      color: #fff9cc;
+    }
+    .emotion.grief {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,255,255,0.3), rgba(0,0,0,0.8)), url('white-lily.jpg') center/cover no-repeat;
+      background-blend-mode: overlay;
+      padding: 180px 10vw 200px;
+      color: #f5f5f5;
+    }
+    .emotion.grief .emotion-content h2 {
+      color: #fefefe;
+    }
+    .emotion.grief .emotion-content p {
+      color: #eaeaea;
+    }
+    .emotion.grief .emotion-content blockquote {
+      border-left: 4px solid #cccccc;
+      color: #ffffff;
+    }
+    .emotion.forgiveness {
+      position: relative;
+      background: linear-gradient(180deg, rgba(255,245,230,0.3), rgba(0,0,0,0.8)), url('magnolia.jpg') center/cover no-repeat;
+      background-blend-mode: overlay;
+      padding: 180px 10vw 200px;
+      color: #f9f5f0;
+    }
+    .emotion.forgiveness .emotion-content h2 {
+      color: #f6e9dc;
+    }
+    .emotion.forgiveness .emotion-content p {
+      color: #f0e2d4;
+    }
+    .emotion.forgiveness .emotion-content blockquote {
+      border-left: 4px solid #e8d3b5;
+      color: #fdf7f2;
+    }
+    .interactive {
+      background: linear-gradient(180deg, rgba(245,225,230,0.15), rgba(10,5,15,0.95)), url('bouquet-background.jpg') center/cover no-repeat;
+      background-blend-mode: overlay;
+      padding: 180px 10vw 200px;
+      text-align: center;
+      color: #fceff1;
+    }
+    .interactive h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3.5rem;
+      margin-bottom: 20px;
+      color: #ffe6ec;
+    }
+    .interactive p {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      color: #f4dadd;
+    }
+    .cta-button {
+      padding: 16px 36px;
+      font-size: 1.1rem;
+      background-color: #ffccd5;
+      border: none;
+      border-radius: 30px;
+      font-family: 'Spectral', serif;
+      cursor: pointer;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+      transition: all 0.3s ease;
+      color: #2a0c15;
+    }
+    .cta-button:hover {
+      background-color: #ffe6ec;
+      transform: translateY(-2px);
+      box-shadow: 0 12px 25px rgba(0,0,0,0.25);
+    }
+    .final-call {
+      background: #1a0e10;
+      padding: 160px 10vw;
+      text-align: center;
+      color: #f9e8eb;
+    }
+    .final-call h2 {
+      font-family: 'Cinzel Decorative', serif;
+      font-size: 3rem;
+      margin-bottom: 24px;
+      color: #ffe9f0;
+    }
+    .final-call p {
+      font-size: 1.3rem;
+      color: #f3d6db;
+      line-height: 1.8;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .footer {
+      background: #0d0607;
+      text-align: center;
+      padding: 80px 10vw;
+      font-size: 0.9rem;
+      color: #c8bfc1;
+      border-top: 1px solid #3a2a2e;
+    }
+</style>
+</head>
+<body>
+  <header class="hero" role="banner">
+    <div class="petal"><svg viewBox="0 0 100 150"><path d="M50,0 C70,20 80,80 50,150 C20,80 30,20 50,0 Z" fill="#fcdcdc"/></svg></div>
+    <div class="petal"><svg viewBox="0 0 100 150"><path d="M50,0 C68,22 83,85 50,150 C17,85 32,22 50,0 Z" fill="#f6c5c5"/></svg></div>
+    <div class="petal"><svg viewBox="0 0 100 150"><path d="M50,0 C72,18 86,90 50,150 C14,90 28,18 50,0 Z" fill="#fcc2c2"/></svg></div>
+    <div class="petal"><svg viewBox="0 0 100 150"><path d="M50,0 C65,25 82,78 50,150 C18,78 35,25 50,0 Z" fill="#f9baba"/></svg></div>
+    <div class="petal"><svg viewBox="0 0 100 150"><path d="M50,0 C60,30 88,70 50,150 C12,70 40,30 50,0 Z" fill="#fcc2dc"/></svg></div>
+    <div class="petal"><svg viewBox="0 0 100 150"><path d="M50,0 C75,15 85,90 50,150 C15,90 25,15 50,0 Z" fill="#fbd2d2"/></svg></div>
+    <div class="hero-content">
+      <h2>The Language of Flowers</h2>
+      <p>Where each petal unfolds a secret, and emotions bloom without words.</p>
+      <button class="scroll-indicator" onclick="document.getElementById('intro').scrollIntoView({behavior:'smooth'})">
+        <span>Explore</span>
+        <img src="explore buttom.png" alt="flower icon" class="button-flower-png"/>
+      </button>
+    </div>
+  </header>
+
+  <section class="section intro" id="intro">
+    <div class="intro-bg"></div>
+    <div class="intro-content">
+      <h2>What Is Floriography?</h2>
+      <p class="description">
+        <span>Floriography—the silent poetry of petals—spoke in blossoms when words fell short.</span>
+        <span>Today we revive this timeless code as a modern design language: every bloom a symbol, every bouquet a message.</span>
+      </p>
+    </div>
+  </section>
+
+  <section class="section timeline" id="timeline">
+    <h2>History of Floriography</h2>
+    <div class="timeline-container">
+      <div class="timeline-item">
+        <div class="timeline-year">Ancient Greece</div>
+        <div class="timeline-text">Philosophers and poets used flowers in rituals and storytelling to express divine beauty.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">17th Century</div>
+        <div class="timeline-text">In the Ottoman Empire, tulips symbolized paradise on earth and secret longing.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Victorian Era</div>
+        <div class="timeline-text">Floriography flourished as coded courtship; every flower sent a secret message.</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-year">Present Day</div>
+        <div class="timeline-text">Designers and romantics revive flower language as a poetic medium of modern emotion.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section gallery" id="gallery">
+    <h2>Gallery of Bouquets</h2>
+    <div class="gallery-grid">
+      <div class="gallery-card"><img src="bouquet1.jpg" alt="Love & Passion"><p>Love & Passion</p></div>
+      <div class="gallery-card"><img src="bouquet2.jpg" alt="Longing & Memory"><p>Longing & Memory</p></div>
+      <div class="gallery-card"><img src="bouquet3.jpg" alt="Hope & Renewal"><p>Hope & Renewal</p></div>
+      <div class="gallery-card"><img src="bouquet4.jpg" alt="Grief & Remembrance"><p>Grief & Remembrance</p></div>
+      <div class="gallery-card"><img src="bouquet5.jpg" alt="Forgiveness & New Beginnings"><p>Forgiveness & New Beginnings</p></div>
+    </div>
+  </section>
+
+  <section class="section emotion love" id="love">
+    <div class="emotion-bg"></div>
+    <div class="emotion-content">
+      <h2>LOVE</h2>
+      <p>The red rose stands as the eternal emblem of deep affection—its velvety crimson petals conveying passion, devotion, and the promise of unwavering heart.</p>
+      <blockquote>"When words falter, let a rose speak."</blockquote>
+    </div>
+  </section>
+
+  <section class="section emotion longing" id="longing">
+    <div class="emotion-bg"></div>
+    <div class="emotion-content">
+      <h2>LONGING</h2>
+      <p>The forget-me-not’s tender blue bloom bridges distance and time, a whispered vow that “you remain in my thoughts,” no matter how far apart we wander.</p>
+      <blockquote>"Even miles away, our hearts bloom together."</blockquote>
+    </div>
+  </section>
+
+  <section class="section emotion hope" id="hope">
+    <div class="emotion-bg"></div>
+    <div class="emotion-content">
+      <h2>HOPE</h2>
+      <p>The sunflower turns its golden face toward the light—an emblem of resilience, faith, and the promise of brighter days yet to come.</p>
+      <blockquote>"In every sunrise, find the courage to bloom."</blockquote>
+    </div>
+  </section>
+
+  <section class="section emotion grief" id="grief">
+    <div class="emotion-bg"></div>
+    <div class="emotion-content">
+      <h2>GRIEF</h2>
+      <p>The white lily offers serene solace in times of sorrow, its pure petals embodying peace, remembrance, and the gentle acceptance of loss.</p>
+      <blockquote>"In quiet reflection, memories blossom anew."</blockquote>
+    </div>
+  </section>
+
+  <section class="section emotion forgiveness" id="forgiveness">
+    <div class="emotion-bg"></div>
+    <div class="emotion-content">
+      <h2>FORGIVENESS</h2>
+      <p>The magnolia’s dignified bloom speaks of grace and renewal—the strength to let go, forgive, and open one’s heart to new beginnings.</p>
+      <blockquote>"Release the past, and watch your spirit blossom."</blockquote>
+    </div>
+  </section>
+
+  <section class="section interactive" id="interactive">
+    <div class="interactive-content">
+      <h2>Build Your Bouquet</h2>
+      <p>Choose the emotions you wish to express, and we’ll guide you to the perfect floral arrangement—tailored to your heart’s message.</p>
+      <button class="cta-button">Begin Your Arrangement →</button>
+    </div>
+  </section>
+
+  <section class="section final-call" id="final-call">
+    <div class="final-call-content">
+      <h2>Let Flowers Speak</h2>
+      <p>Let the blooms whisper what words cannot. Emotions bloom beautifully when expressed through petals.</p>
+    </div>
+  </section>
+
+  <footer class="section footer" role="contentinfo">
+    <p>© 2025 The Language of Flowers — A Creative Experience<br/>Designed & Coded by SADAF</p>
+  </footer>
+</body>
+</html>
